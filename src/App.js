@@ -3,7 +3,7 @@ import './App.css';
 
 const App = () => {
   const [remaining, setRemaining] = useState(0);
-
+  const [filter, setFilter] = useState('all');
   const [items, setItems] = useState([
     {
       id: 1,
@@ -24,8 +24,28 @@ const App = () => {
       edit: false,
     },
   ]);
+  const textInput = useRef();
+
+  const [filtered, setFiltered] = useState(items);
+
+  useEffect(() => {
+    switch (filter) {
+      case 'active':
+        setFiltered(items.filter((item) => !item.done));
+        break;
+
+      case 'completed':
+        setFiltered(items.filter((item) => item.done));
+        break;
+
+      default:
+        setFiltered(items);
+        break;
+    }
+  }, [filter, items]);
 
   const toggle = (item) => {
+    console.log('toggle', item);
     const _items = items.map((_item) => {
       if (item.id === _item.id) {
         _item.done = !_item.done;
@@ -38,7 +58,12 @@ const App = () => {
   };
 
   const purge = () => {
+    console.log('purge');
     setItems(items.filter((item) => !item.done));
+  };
+
+  const remove = (_item) => {
+    setItems(items.filter((item) => item.id !== _item.id));
   };
 
   useEffect(() => {
@@ -59,17 +84,24 @@ const App = () => {
         />
 
         <ul id="items">
-          {items.map((item) => (
+          {filtered.map((item) => (
             <li className="todo-item">
               <div className="todo-item-view">
-                <input
-                  type="checkbox"
-                  className="todo-item-toggle"
-                  checked={item.done}
-                  onChange={() => toggle(item)}
-                />
-                <label>{item.value}</label>
-                <button className="todo-item-destroy">×</button>
+                <label>
+                  <input
+                    type="checkbox"
+                    className="todo-item-toggle"
+                    checked={item.done}
+                    onChange={() => toggle(item)}
+                  />
+                  {item.value}
+                </label>
+                <button
+                  className="todo-item-destroy"
+                  onClick={() => remove(item)}
+                >
+                  ×
+                </button>
               </div>
 
               {item.edit ? (
@@ -86,9 +118,24 @@ const App = () => {
         <div className="todo-list-summary">
           <div>{remaining} items left</div>
           <div className="todo-list-filters">
-            <input type="radio" name="filter" /> All
-            <input type="radio" name="filter" /> Active
-            <input type="radio" name="filter" /> Completed
+            <input
+              type="radio"
+              name="filter"
+              onClick={() => setFilter('all')}
+            />{' '}
+            All
+            <input
+              type="radio"
+              name="filter"
+              onClick={() => setFilter('active')}
+            />{' '}
+            Active
+            <input
+              type="radio"
+              name="filter"
+              onClick={() => setFilter('completed')}
+            />{' '}
+            Completed
           </div>
 
           <div>
