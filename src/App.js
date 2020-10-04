@@ -110,15 +110,14 @@ const App = () => {
           {filtered.map((item) => (
             <li className="todo-item">
               <div className="todo-item-view">
-                <label>
-                  <input
-                    type="checkbox"
-                    className="todo-item-toggle"
-                    checked={item.done}
-                    onChange={() => toggle(item)}
-                  />
-                  {item.value}
-                </label>
+                <input
+                  id={`item-${item.id}`}
+                  type="checkbox"
+                  className="todo-item-toggle"
+                  checked={item.done}
+                  onChange={() => toggle(item)}
+                />
+                <label htmlFor={`item-${item.id}`}>{item.value}</label>
                 <button
                   className="todo-item-destroy"
                   onClick={() => remove(item)}
@@ -142,23 +141,28 @@ const App = () => {
           <div>{remaining} items left</div>
           <div className="todo-list-filters">
             <input
+              id="filter-all"
               type="radio"
               name="filter"
+              checked={filter === 'all'}
               onClick={() => setFilter('all')}
-            />{' '}
-            All
+            />
+            <label htmlFor="filter-all">All</label>
             <input
+              id="filter-active"
               type="radio"
               name="filter"
               onClick={() => setFilter('active')}
-            />{' '}
-            Active
+            />
+            <label htmlFor="filter-active">Active</label>
+
             <input
+              id="filter-completed"
               type="radio"
               name="filter"
               onClick={() => setFilter('completed')}
-            />{' '}
-            Completed
+            />
+            <label htmlFor="filter-completed">Completed</label>
           </div>
 
           <div>
