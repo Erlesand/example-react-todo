@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-function App() {
+
+const App = () => {
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      value: 'Dip your toes in the JavaScript-water',
+      done: true,
+      edit: false,
+    },
+    {
+      id: 2,
+      value: 'Build an awesome todo-app!',
+      done: false,
+      edit: false,
+    },
+    {
+      id: 3,
+      value: 'Find a cure for Corona',
+      done: false,
+      edit: false,
+    },
+  ]);
+
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
       <div className="todo-header">
@@ -15,35 +37,19 @@ function App() {
         />
 
         <ul id="items">
-          <li className="todo-item">
-            <div className="todo-item-view">
-              <input type="checkbox" className="todo-item-toggle" />
-              <label>Dip your toes in the JavaScript-water</label>
-              <button className="todo-item-destroy">×</button>
-            </div>
+          {items.map((item) => (
+            <li className="todo-item">
+              <div className="todo-item-view">
+                <input type="checkbox" className="todo-item-toggle" />
+                <label>{item.value}</label>
+                <button className="todo-item-destroy">×</button>
+              </div>
 
-            <div className="todo-item-edit">
-              <input
-                className="todo-item-edit"
-                value="Dip your toes in the JavaScript-water"
-              />
-            </div>
-          </li>
-
-          <li className="todo-item">
-            <div className="todo-item-view">
-              <input type="checkbox" className="todo-item-toggle" />
-              <label>Build an awesome todo-app!</label>
-              <button className="todo-item-destroy">×</button>
-            </div>
-
-            <div className="todo-item-edit">
-              <input
-                className="todo-item-edit"
-                value="Build an awesome todo-app!"
-              />
-            </div>
-          </li>
+              <div className="todo-item-edit">
+                <input className="todo-item-edit" value={item.value} />
+              </div>
+            </li>
+          ))}
         </ul>
 
         <div className="todo-list-summary">
@@ -61,6 +67,6 @@ function App() {
       </section>
     </div>
   );
-}
+};
 
 export default App;
