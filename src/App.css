@@ -1,38 +1,101 @@
-.App {
+* {
+  font-family: 'Open Sans';
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.todo-app {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  width: 50%;
+  margin: 0 auto;
+  box-shadow: 5px 5px 40px 5px rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+  display: block;
+  font-size: 80px;
+  color: rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.todo-app-add {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  font-size: 20px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.todo-item {
+  list-style: none;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.todo-item-view {
   display: flex;
-  flex-direction: column;
+}
+
+.todo-item-view label {
+  flex: 1 1 0%;
+  font-size: 20px;
+  padding: 0.5rem 1rem;
+}
+
+.todo-item-toggle {
+  margin: 1rem;
+  width: 1rem;
+}
+
+.todo-item-edit {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: rgba(0, 0, 0, 0.02);
 }
 
-.App-link {
-  color: #61dafb;
+.todo-item-edit input {
+  flex: 1 1 0%;
+  padding: 0.5rem 1rem;
+  font-size: 20px;
+  padding-left: 4rem;
+  border: none;
+  background: transparent;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.todo-item-destroy {
+  color: rgba(139, 0, 0, 0.3);
+  font-size: 20px;
+  margin-right: 0.5rem;
+  border: none;
+  background: none;
+}
+
+.todo-item-destroy:hover {
+  color: rgba(139, 0, 0, 0.8);
+  cursor: pointer;
+}
+
+#items {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-list-summary {
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+}
+
+.todo-list-filters {
+  flex: 1 1 0%;
+  text-align: center;
+}
+
+.todo-list-clear {
+  background-color: transparent;
+  border: none;
 }
