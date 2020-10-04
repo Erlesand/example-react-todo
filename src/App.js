@@ -37,6 +37,10 @@ const App = () => {
     setItems(_items);
   };
 
+  const purge = () => {
+    setItems(items.filter((item) => !item.done));
+  };
+
   useEffect(() => {
     setRemaining(items.filter((item) => !item.done).length);
   }, [items]);
@@ -88,7 +92,9 @@ const App = () => {
           </div>
 
           <div>
-            <button className="todo-list-clear">Clear completed</button>
+            <button className="todo-list-clear" onClick={() => purge()}>
+              Clear completed
+            </button>
           </div>
         </div>
       </section>
