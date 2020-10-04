@@ -25,6 +25,18 @@ const App = () => {
     },
   ]);
 
+  const toggle = (item) => {
+    const _items = items.map((_item) => {
+      if (item.id === _item.id) {
+        _item.done = !_item.done;
+      }
+
+      return _item;
+    });
+
+    setItems(_items);
+  };
+
   useEffect(() => {
     setRemaining(items.filter((item) => !item.done).length);
   }, [items]);
@@ -50,6 +62,7 @@ const App = () => {
                   type="checkbox"
                   className="todo-item-toggle"
                   checked={item.done}
+                  onChange={() => toggle(item)}
                 />
                 <label>{item.value}</label>
                 <button className="todo-item-destroy">×</button>
