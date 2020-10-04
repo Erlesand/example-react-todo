@@ -40,14 +40,22 @@ const App = () => {
           {items.map((item) => (
             <li className="todo-item">
               <div className="todo-item-view">
-                <input type="checkbox" className="todo-item-toggle" />
+                <input
+                  type="checkbox"
+                  className="todo-item-toggle"
+                  checked={item.done}
+                />
                 <label>{item.value}</label>
                 <button className="todo-item-destroy">×</button>
               </div>
 
-              <div className="todo-item-edit">
-                <input className="todo-item-edit" value={item.value} />
-              </div>
+              {item.edit ? (
+                <div className="todo-item-edit">
+                  <input className="todo-item-edit" value={item.value} />
+                </div>
+              ) : (
+                ''
+              )}
             </li>
           ))}
         </ul>
