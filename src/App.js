@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 const App = () => {
+  const [remaining, setRemaining] = useState(0);
+
   const [items, setItems] = useState([
     {
       id: 1,
@@ -22,6 +24,10 @@ const App = () => {
       edit: false,
     },
   ]);
+
+  useEffect(() => {
+    setRemaining(items.filter((item) => !item.done).length);
+  }, [items]);
 
   return (
     <div className="App" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -61,7 +67,7 @@ const App = () => {
         </ul>
 
         <div className="todo-list-summary">
-          <div>2 items left</div>
+          <div>{remaining} items left</div>
           <div className="todo-list-filters">
             <input type="radio" name="filter" /> All
             <input type="radio" name="filter" /> Active
