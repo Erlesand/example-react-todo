@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 
 const App = () => {
@@ -57,6 +57,27 @@ const App = () => {
     setItems(_items);
   };
 
+  const add = (event) => {
+    if (event.key !== 'Enter') {
+      return;
+    }
+
+    if (textInput.current.value.trim() === '') {
+      return;
+    }
+
+    const item = {
+      id: Date.now(),
+      value: textInput.current.value,
+      done: false,
+      edit: false,
+    };
+
+    setItems([...items, item]);
+
+    textInput.current.value = '';
+  };
+
   const purge = () => {
     console.log('purge');
     setItems(items.filter((item) => !item.done));
@@ -79,8 +100,10 @@ const App = () => {
       <section className="todo-app">
         <input
           type="text"
+          ref={textInput}
           className="todo-app-add"
           placeholder="What shall we do today?"
+          onKeyPress={add}
         />
 
         <ul id="items">
